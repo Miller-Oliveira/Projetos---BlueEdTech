@@ -1,5 +1,5 @@
 # Projetos-BlueEdTech
 Repositório para subir todos os projetos realizado durante o bootcamp da Blue EdTech.
-Alinhado a esquerda | Centralizado | Alinhado a direita
+Projetos | Link | Nota
 :--------- | :------: | -------:
-Valor | Valor | Valor
+Valor | <https://colab.research.google.com/drive/1CK3kSaqLkym12e4iOD3hiv_S_ouP_VNp> | Valor
