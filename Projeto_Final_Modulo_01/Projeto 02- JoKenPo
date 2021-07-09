@@ -1,0 +1,100 @@
+from random import randint
+from time import sleep
+
+print('Seja bem vindo (a) ao JOKENPO \n A jornada para a vitória não será fácil, faça por merecer a vitória \n Boa sorte!!! \n ')
+lista = ['Pedra ✊', 'Papel ✋', 'Tesoura ✌️']
+contagem_jogador = contagem_computador = empate = 0
+
+
+while True:
+    sleep(.5)
+    
+    rodadas = int(input('Digite quantas rodadas quer jogar: '))
+    
+    for contador in range(0, rodadas):
+        escolha_jogador = int(input('''
+        [0] - Pedra ✊
+        [1] - Papel ✋
+        [2] - Tesoura ✌️
+        Digite sua escolha: '''))
+        sleep(.2)
+        print('JO')
+        sleep (1)
+        print('KEN')
+        sleep (1)
+        print('PO!!!')
+        #Bloco para solicitar a escolha do jogador
+        computador = randint(0, 2)
+        #Bloco de código para fazer as comparações entre as jogadas.
+        if escolha_jogador < 0 or escolha_jogador > 2: # Se escolha do jogador estiver fora de (0(pedra)1(papel)2(tesoura) será invalida)
+            print('opção inválida!!!')
+            rodadas += 1
+            continue
+        else:
+            if computador == 0:  # pedra
+                if escolha_jogador == 0:
+                    empate += 1
+                    sleep(.5)
+                    print(f'\n Essa rodada ficou empatada, mas confio em você!!! \n Você escolheu: {lista[escolha_jogador]}\nComputador: {lista[computador]}')
+                elif escolha_jogador == 1:
+                    contagem_computador += 1
+                    sleep(.5)
+                    print(f'\n Boooa! Você ganhou essa rodada!!! \nVocê escolheu: {lista[computador]}\nComputador: {lista[computador]}')
+                elif escolha_jogador == 2:
+                    contagem_computador += 1
+                    sleep(.5)
+                    print(f'\n O computador ganhou essa rodada, não desanime!!! \nVocê escolheu: {lista[escolha_jogador]}\nComputador: {lista[computador]}')
+
+            elif computador == 1:  # papel
+                if escolha_jogador == 1:
+                    empate += 1
+                    sleep(.5)
+                    print(f'\n Essa rodada ficou empatada, mas confio em você!!! \nVocê escolheu: {lista[escolha_jogador]}\nComputador: {lista[computador]}')
+                elif escolha_jogador == 0:
+                    sleep(.5)
+                    contagem_jogador += 1
+                    print(
+                        f'\n Boooa! Você ganhou essa rodada!!! \nSua escolha: {lista[escolha_jogador]}\nComputador: {lista[computador]}')
+                elif escolha_jogador == 2:
+                    contagem_jogador += 1
+                    sleep(.5)
+                    print(f'\n \nSua escolha: {lista[escolha_jogador]}\nComputador: {lista[computador]}')
+
+            elif computador == 2:  # tesoura
+                if escolha_jogador == 2:
+                    empate += 1
+                    sleep(.5)
+                    print(
+                        f'\n Essa rodada ficou empatada, mas confio em você!!! \nVocê escolheu: {lista[escolha_jogador]}\nComputador: {lista[computador]}')
+                elif escolha_jogador == 1:
+                    contagem_computador += 1
+                    sleep(.5)
+                    print(
+                        f'\n O computador ganhou essa rodada, não desanime!!! \nVocê escolheu:{lista[escolha_jogador]}\nComputador: {lista[computador]}')
+                elif escolha_jogador == 0:
+                    contagem_jogador += 1
+                    sleep(.5)
+                    print(f'\n Boooa! Você ganhou essa rodada!!! \nVocê escolheu: {lista[escolha_jogador]}\nComputador: {lista[computador]}')
+                        
+#Bloco de código para fazer a contagem de resultado
+    if contagem_jogador > contagem_computador:
+        sleep(.5)
+        print("Você ganhou, eu sempre acreditei!!!")
+    elif contagem_computador > contagem_jogador:
+        sleep(.5)
+        print('Infelizmente, o computador foi o vencedor')
+    else:
+        sleep(.5)
+        print('Jogo empatado')
+    sleep(.5)
+    continuar = input('Deseja continuar jogando [S/N]: ').lower().strip()[0]
+    if continuar == 's':
+        continue
+    else:
+        break
+
+#Resultado final
+sleep(.5)
+print(f'\nSuas vitórias: {contagem_jogador} - Total 🏆')
+print(f'Vitórias do computador: {contagem_computador} - Total 🏆')
+print(f'Empates: {empate} - Total')

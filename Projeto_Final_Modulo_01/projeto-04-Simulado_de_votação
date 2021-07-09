@@ -1,0 +1,88 @@
+#Projeto 04 do curso da BlueEdTech - Simulador de votação
+from datetime import datetime 
+from time import sleep
+votos_cruzeiro = votos_atletico = votos_ipatinga = votos_nulos = votos_embranco = vencedor_votos = 0
+votos_validos = list() 
+vencedor_nome = '' 
+
+#Bloco de codigo abaixo para verificar a idade do votante e autorizar ou não o voto.
+def autoriza_voto(ano_de_nascimento = 0): 
+    anoatual = datetime.now() 
+    idade = anoatual.year - ano_de_nascimento 
+    if idade >= 70 or 16 <= idade < 18: 
+        return 'OPCIONAL'
+    elif 18 <= idade < 70: 
+        return 'OBRIGATÓRIO'
+    elif idade < 16: 
+        return 'NEGADO'
+
+#Bloco de código abaixo para receber a autorização e o voto
+def votacao(autorizacao = 'NEGADO', voto = 0): 
+    if autorizacao == 'NEGADO': 
+        print('Você ainda não tem idade suficiente para votar nessa eleição.')
+        sleep(5)
+        votacao(autoriza_voto(int(input('\nInsira seu ano de nascimento: '))), int(input('''Estamos realizando uma votação para decidir quem tem a maior torcida, segue as opções:
+    [1] - Cruzeiro
+    [2] - Atletico-MG
+    [3] - Ipatinga
+    [4] - Voto Nulo
+    [5] - Voto em Branco
+Insira a opção escolhida: ''')))
+       
+#Vi um colega aplicando esse global, e mesmo não entendendo 100% o funcionamento, vi que funciona, então usei no meu código também.
+    else: 
+        global votos_cruzeiro 
+        global votos_atletico
+        global votos_ipatinga
+        global votos_nulos
+        global votos_embranco
+        global votos_validos
+        global vencedor_votos
+        global vencedor_nome
+        if voto == 1: 
+            votos_cruzeiro += 1
+        elif voto == 2:
+            votos_atletico += 1
+        elif voto == 3:
+            votos_ipatinga += 1
+        elif voto == 4:
+            votos_nulos += 1
+        elif voto == 5:
+            votos_embranco += 1
+        comando = input('\nDeseja finalizar? [S/N] ').strip().upper()[0] 
+        if comando == 'N':
+            votacao(autoriza_voto(int(input('\nInsira seu ano de nascimento: '))), int(input('''Esta é a urna de votação para decidir o líder da pólis, estas são suas opções de voto:
+    [1] - Cruzeiro
+    [2] - Atletico
+    [3] - Ipatinga
+    [4] - Voto Nulo
+    [5] - Voto em Branco
+Insira a opção correspondente ao seu voto: ''')))
+        if comando == 'S': 
+            votos_validos = [votos_cruzeiro, votos_atletico, votos_ipatinga]
+            vencedor_votos = max(votos_validos) 
+            #O bloco abaixo team as condições para definir o clube com maior votos.
+            if vencedor_votos == votos_cruzeiro: 
+                vencedor_nome = 'Cruzeiro'
+            elif vencedor_votos == votos_atletico:
+                vencedor_nome = 'Atletico'
+            elif vencedor_votos == votos_ipatinga:
+                vencedor_nome = 'Ipatinga'
+
+            print(f'''\nResultado da votação:
+            Cruzeiro: {votos_cruzeiro} votos
+            Atletico: {votos_atletico} votos
+            Ipatinga: {votos_ipatinga} votos
+            Votos Nulos: {votos_nulos} votos
+            Votos em Branco: {votos_embranco} votos
+            Total de votos: {votos_cruzeiro+votos_atletico+votos_ipatinga+votos_nulos+votos_embranco} votos
+            
+            Com {vencedor_votos} votos (correspondente a {(vencedor_votos/sum(votos_validos))*100:.2f}% dos votos válidos), a maior torcida é a do {vencedor_nome}!
+            ''')
+votacao(autoriza_voto(int(input('\nInsira seu ano de nascimento: '))), int(input('''Esta é a urna de votação para decidir o líder da pólis, estas são suas opções de voto:
+    [1] - Cruzeiro
+    [2] - Atletico
+    [3] - Ipatinga
+    [4] - Voto Nulo
+    [5] - Voto em Branco
+Insira a opção correspondente ao seu voto: ''')))
